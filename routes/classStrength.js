@@ -7,8 +7,7 @@ router.get("/", strengthController.get)
 
 router.post("/add", strengthController.add)
 // router.delete("/remove", strengthController.removeClass)
-// router.put("/edit", strengthController.editClass)
-
+router.put("/edit/:id", strengthController.edit)
 router.route('/reset')
 .post(strengthController.default)
 

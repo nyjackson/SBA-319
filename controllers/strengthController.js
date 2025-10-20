@@ -2,6 +2,35 @@ import data from "../data/strength.js";
 import db from "../db.js";
 import { ObjectId } from "mongodb";
 
+async () => {
+     const validator = {
+      $jsonSchema: {
+        bsonType: "object",
+        title: "class validator",
+        required: ["name","type"],
+        properties: {
+          _id: {
+            bsonType: "objectId",
+          },
+          name: {
+            bsonType: "string",
+          },
+          sub_type: {
+            bsonType: ["string","null"],
+          },
+          type: {
+            enum: ["magic", "strength", "endurance"]
+          },
+          weapon: {
+            bsonType: ["string","null"],
+          },
+        },
+      },
+    }
+        await db.command({collMod: "strength", validator})
+        console.log("Validity rules applied.")
+}
+
 async function getClasses(req, res) {
   let strength_classes;
   console.log("In Get Strength Classes");
@@ -16,6 +45,7 @@ async function getClasses(req, res) {
 
 async function resetClasses(req, res) {
   try {
+    
     const collection = await db.collection("strength");
     let clear = await collection.deleteMany({});
     let resetResult = await collection.insertMany(data);
@@ -28,41 +58,20 @@ async function resetClasses(req, res) {
       });
   } catch (e) {
     console.log(e);
+    res.status(400).json({message: "Unable to Reset Classes."})
   }
 }
 
 async function addClass(req, res) {
   try {
     const collection = await db.collection("strength");
-    const validator = {
-      $jsonSchema: {
-        bsonType: "object",
-        title: "class validator",
-        required: ["_id", "name", "sub_type", "type", "weapon"],
-        properties: {
-          _id: {
-            bsonType: "objectId",
-          },
-          name: {
-            bsonType: "string",
-          },
-          sub_type: {
-            bsonType: "string",
-          },
-          type: {
-            enum: ["magic", "strength", "endurance"]
-          },
-          weapon: {
-            bsonType: "string",
-          },
-        },
-      },
-    }
-    const applyRules = await db.command({collMod: "strength", validator})
-    console.log(applyRules)
-    let result = await collection.insertOne(req.body)
+    console.log("Collection", collection)
+   
+    let result = await collection.insertOne(req.body).catch((e) => {
+    return e.errInfo.details.schemaRulesNotSatisfied;
+  });
     res
-      .status(201)
+      .status(200)
       .json({
         message: "New Strength Class Added",
         result: result,
@@ -76,9 +85,13 @@ async function addClass(req, res) {
 
 async function editClass(req,res){
     try{
-        
+        const collection = await db.collection("strength")
+        let result = await collection.updateOne({_id: req.params.id},{...req.body})
+        let updatedResult = await collection.find({_id:req.params.id})
+        res.status(200).json({message: `Class with id: ${_id} altered.`, result: result, classEntry: updatedResult})
     }catch(e){
-
+        console.log(e)
+        res.status().json({})
     }
 }
 
@@ -86,6 +99,6 @@ export default {
   get: getClasses,
   default: resetClasses,
   add: addClass,
- // edit: editClass,
+  edit: editClass,
  // remove: removeClass,
 };
