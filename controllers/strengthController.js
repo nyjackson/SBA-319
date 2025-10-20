@@ -62,14 +62,24 @@ async function addClass(req, res) {
     console.log(applyRules)
     let result = await collection.insertOne(req.body)
     res
-      .status(200)
+      .status(201)
       .json({
         message: "New Strength Class Added",
-        addedClass: result,
+        result: result,
+        data: req.body
       });
   } catch (e) {
     console.log(e);
+    res.status(406).json({message: "Unable to add class. Ensure the request body matches validation rules.", data:req.body})
   }
+}
+
+async function editClass(req,res){
+    try{
+        
+    }catch(e){
+
+    }
 }
 
 export default {
