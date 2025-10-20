@@ -1,12 +1,12 @@
-import data from '../data/magic.js'
+import data from '../data/strength.js'
 import db from '../db.js'
 
 async function getClasses(req,res){
-        let magic_classes;
-        console.log("In Get Magic Classes")
+        let strength_classes;
+        console.log("In Get Strength Classes")
         try{
-            const collection = await db.collection("magic")
-            magic_classes = await collection.find({}).toArray()
+            const collection = await db.collection("strength")
+            strength_classes = await collection.find({}).toArray()
         }
         catch(e){
             console.log(e)
@@ -15,10 +15,10 @@ async function getClasses(req,res){
     }
 async function resetClasses(req,res){
     try{
-        const collection = await db.collection("magic")
+        const collection = await db.collection("strength")
         let clear = await collection.deleteMany({})
         let resetResult = await collection.insertMany(data)
-        res.status(200).json({message: "Magic classes reset to the original 10 classes.", result: resetResult, defaultData: data})
+        res.status(200).json({message: "Strength classes reset to the original 10 classes.", result: resetResult, defaultData: data})
     }
     catch(e){
         console.log(e)
