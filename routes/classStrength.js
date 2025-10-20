@@ -6,10 +6,9 @@ const router = express.Router()
 router.get("/", strengthController.get)
 
 router.post("/add", strengthController.add)
-// router.delete("/remove", strengthController.removeClass)
-router.put("/edit/:id", strengthController.edit)
-router.route('/reset')
-.post(strengthController.default)
+router.delete("/remove/:name", strengthController.remove)
+router.put("/edit/:name", strengthController.edit)
+router.post("/reset", strengthController.default)
 
 
 export default router

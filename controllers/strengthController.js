@@ -7,7 +7,7 @@ async () => {
       $jsonSchema: {
         bsonType: "object",
         title: "class validator",
-        required: ["name","type"],
+        required: ["_id","name","type"],
         properties: {
           _id: {
             bsonType: "objectId",
@@ -83,15 +83,29 @@ async function addClass(req, res) {
   }
 }
 
-async function editClass(req,res){
+async function editClassByName(req,res){
     try{
         const collection = await db.collection("strength")
-        let result = await collection.updateOne({_id: req.params.id},{...req.body})
-        let updatedResult = await collection.find({_id:req.params.id})
-        res.status(200).json({message: `Class with id: ${_id} altered.`, result: result, classEntry: updatedResult})
+        let result = await collection.updateOne({"name": req.params.name},{$set: {...req.body}})
+        let updatedResult = await collection.findOne({"name": req.params.name})
+        res.status(200).json({message: `Class with name: ${req.params.name} altered.`, result: result, classEntry: updatedResult})
     }catch(e){
         console.log(e)
         res.status().json({})
+    }
+}
+
+async function removeClassByName(req,res){
+    try{
+        const collection = await db.collection("strength")
+        let deletedEntry = await collection.findOne({"name":req.params.name})
+        let result = await collection.deleteOne({"name":req.params.name})
+        res.status(200).json({message: `${req.params.name} was deleted.`, deleted:deletedEntry, result: result})
+        
+    }
+    catch(e){
+        console.log(e)
+        res.status(404).json({message: `Unable to locate class by the name of ${req.params.name}. Try again.`})
     }
 }
 
@@ -99,6 +113,6 @@ export default {
   get: getClasses,
   default: resetClasses,
   add: addClass,
-  edit: editClass,
- // remove: removeClass,
+  edit: editClassByName,
+  remove: removeClassByName,
 };
