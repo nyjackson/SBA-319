@@ -12,7 +12,7 @@ console.log("Connection with MongoDB Established.")
 console.log(e)
 }
 
-const dbName = "video-game-classes" //fill once idea is set
+const dbName = "video-game-classes" 
 const db = conn.db(dbName)
 console.log("Connected to", dbName)
 

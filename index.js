@@ -19,7 +19,7 @@ app.use("/strength", strengthRoute)
 app.use("/endurance", enduranceRoute)
 
 app.get('/', (req,res, next) => {
-    res.send("Welcome to the Classes API ")
+    res.send("Welcome to the Classes API. ")
 })
 
 app.listen(port, () => {
