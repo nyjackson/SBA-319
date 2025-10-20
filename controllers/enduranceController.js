@@ -19,12 +19,13 @@ async function resetClasses(req,res){
         const collection = await db.collection("endurance")
         let clear = await collection.deleteMany({})
         let resetResult = await collection.insertMany(data)
+        res.status(200).json({message: "Endurance classes reset to the original 10 classes.", result: resetResult, defaultData: data})
+
     }
     catch(e){
         console.log(e)
         res.status(400)
     }
-    res.status(200).json({message: "Endurance classes reset to the original 10 classes.", result: resetResult, defaultData: data})
 
 }
 

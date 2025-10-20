@@ -11,7 +11,7 @@ async function getClasses(req,res){
         catch(e){
             console.log(e)
         }
-        res.status(200).json(magic_classes)
+        res.status(200).json(strength_classes)
     }
 async function resetClasses(req,res){
     try{
