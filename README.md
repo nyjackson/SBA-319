@@ -37,7 +37,7 @@ Contains the corresponding data objects used.
 
   ### /routes
 
-  Contains Express router files for each MOngoDB collection:
+  Contains Express router files for each MongoDB collection:
 
   - classMagic.js
   - classStrength.js
