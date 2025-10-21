@@ -1,8 +1,11 @@
 import data from "../data/strength.js";
 import db from "../db.js";
-import { ObjectId } from "mongodb";
 
 async function initialLoad() {
+    console.log("Adding Validation and Indexing..")
+    await db.collection("endurance").createIndex({"name":1}, (err, result) => {
+        console.log(err || result)
+    })
      const validator = {
       $jsonSchema: {
         bsonType: "object",
@@ -91,7 +94,7 @@ async function editClassByName(req,res){
         res.status(200).json({message: `Class with name: ${req.params.name} altered.`, result: result, classEntry: updatedResult})
     }catch(e){
         console.log(e)
-        res.status().json({})
+        res.status(404).json({message: `Unable to find class with name: ${req.params.name}`, requestBody:req.body})
     }
 }
 

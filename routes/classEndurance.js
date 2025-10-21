@@ -10,9 +10,4 @@ router.put("/edit/:name", enduranceController.edit)
 router.post("/reset", enduranceController.default)
 
 
-
-router.route('/reset')
-.post(enduranceController.default)
-
-
 export default router

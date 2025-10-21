@@ -85,7 +85,7 @@ async function editClassByName(req,res){
         res.status(200).json({message: `Class with name: ${req.params.name} altered.`, result: result, classEntry: updatedResult})
     }catch(e){
         console.log(e)
-        res.status().json({})
+        res.status(404).json({message: `Unable to find class with name: ${req.params.name}`, requestBody:req.body})
     }
 }
 

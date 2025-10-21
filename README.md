@@ -37,9 +37,20 @@ Contains the corresponding data objects used.
 
 Contains the corresponding routes to interact with the data.
 
+- GET /magic, /strength, /endurance
+- POST /magic/add, /strength/add, /endurance/add
+- PUT /magic/edit/:name, /strength/edit/:name, /endurance/edit/:name
+- DELETE /magic/remove/:name, /strength/remove/:name, /endurance/remove/:name
+- POST /magic/reset, /strength/reset, /endurance/reset
+
 ### /controllers ###
 
-Contains the corresponding controllers that handle data interaction and modification.
+Contains the corresponding controllers that handle data interaction and modification.\
+
+- enduranceController.js
+- magicController.js
+- strengthController.js
+
 
 ### index.js
 
@@ -51,12 +62,4 @@ MongoDB js file that connects to the MongoDB database.
 
 ## Available Endpoints
 
-- Home: http://localhost:4400/
-
-### API Endpoints
-
-#### Endurance
-
-#### Magic
-
-#### Strength
+- Home - All Classes: http://localhost:4400/
