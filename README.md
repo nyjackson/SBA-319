@@ -4,7 +4,7 @@ A RESTful API for managing video game character classes, organized by their prim
 
 ## Purpose
 
-This assessment measures your understanding of MongoDB and your capability to implement its features in a practical manner.
+This assessment measures my understanding of MongoDB and my capability to implement its features in a practical manner.
 
 - Create a server application with Node, Express, and MongoDB.
 - Create a CRUD API using Express and MongoDB.
@@ -35,7 +35,7 @@ Contains the corresponding data objects used.
 - endurance.js
 - strength.js
 
-  ### /routes
+### /routes
 
   Contains Express router files for each MongoDB collection:
 
@@ -89,7 +89,7 @@ MongoDB js file that connects to the MongoDB database.
 
 - Home - All Classes: http://localhost:4400/
 
-  ## Notes
+ ## Notes
 
   - MongoDB validation rules are automatically enforced when adding new documents
   - Indexes are created on the `name` field for faster querying during edit and delete operations
