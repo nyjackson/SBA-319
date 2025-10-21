@@ -36,7 +36,7 @@ async function initialLoad() {
 
 async function getClasses(req, res) {
   let strength_classes;
-  console.log("In Get Strength Classes");
+  //console.log("In Get Strength Classes");
   try {
     const collection = await db.collection("strength");
     strength_classes = await collection.find({}).toArray();
@@ -68,7 +68,7 @@ async function resetClasses(req, res) {
 async function addClass(req, res) {
   try {
     const collection = await db.collection("strength");
-    console.log("Collection", collection)
+    //console.log("Collection", collection)
    
     let result = await collection.insertOne(req.body).catch((e) => {
     return e.errInfo.details.schemaRulesNotSatisfied;

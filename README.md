@@ -1,6 +1,9 @@
-# Skill-Based Assessment for Module 319: MongoDB Database Application #
+# Skill-Based Assessment for Module 319: MongoDB Database Application
 
-## Purpose ##
+A RESTful API for managing video game character classes, organized by their primary attribute: Magic, Strength, or Endurance. Utilizes MongoDB for data retention.
+
+## Purpose
+
 This assessment measures your understanding of MongoDB and your capability to implement its features in a practical manner.
 
 - Create a server application with Node, Express, and MongoDB.
@@ -10,22 +13,21 @@ This assessment measures your understanding of MongoDB and your capability to im
 - Create MongoDB validation rules.
 - Use MongoDB validation to ensure data consistency.
 
-## Pre-Requisites ##
+## Pre-Requisites
 
 - Node.js
 - npm
 
-## Installation/Access ##
+## Installation/Access
 
 1. Clone this repo
 2. Install dependencies: `npm install`
 3. Type in your terminal, within the repo folder: `nodemon`
 4. Open a browser and go to : http://localhost:4400
 
+## Folders & Files
 
-## Folders & Files ##
-
-### /data ###
+### /data
 
 Contains the corresponding data objects used.
 
@@ -33,9 +35,18 @@ Contains the corresponding data objects used.
 - endurance.js
 - strength.js
 
+  ### /routes
+
+  Contains Express router files for each MOngoDB collection:
+
+  - classMagic.js
+  - classStrength.js
+  - classEndurance.js
+
 ### API Endpoints & CRUD Operations
 
 #### Magic Collection
+
 - GET /magic - Read all magic classes
 - POST /magic/add - Create a new magic class
 - PUT /magic/edit/:name - Update a magic class by name
@@ -43,6 +54,7 @@ Contains the corresponding data objects used.
 - POST /magic/reset - Reset to default data
 
 #### Strength Collection
+
 - GET /strength - Read all strength classes
 - POST /strength/add - Create a new strength class
 - PUT /strength/edit/:name - Update a strength class by name
@@ -50,20 +62,20 @@ Contains the corresponding data objects used.
 - POST /strength/reset - Reset to default data
 
 #### Endurance Collection
+
 - GET /endurance - Read all endurance classes
 - POST /endurance/add - Create a new endurance class
 - PUT /endurance/edit/:name - Update an endurance class by name
 - DELETE /endurance/remove/:name - Delete an endurance class by name
 - POST /endurance/reset - Reset to default data
 
-### /controllers ###
+### /controllers
 
-Contains the corresponding controllers that handle data interaction and modification.
+Contains the corresponding controllers that handle data interaction and modification. Also adds document validation and indexes on existing/new collections.
 
 - enduranceController.js
 - magicController.js
 - strengthController.js
-
 
 ### index.js
 
@@ -76,3 +88,9 @@ MongoDB js file that connects to the MongoDB database.
 ## Available Endpoints
 
 - Home - All Classes: http://localhost:4400/
+
+  ## Notes
+
+  - MongoDB validation rules are automatically enforced when adding new documents
+  - Indexes are created on the `name` field for faster querying during edit and delete operations
+  - Each collection contains 10 default character classes. 

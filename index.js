@@ -22,7 +22,7 @@ app.get('/', async (req,res) => {
     let strengthClasses = await db.collection("strength").find({}).toArray()
     let magicClasses = await db.collection("magic").find({}).toArray() 
     let enduranceClasses = await db.collection("endurance").find({}).toArray()  
-    
+
     const result = [...strengthClasses,...enduranceClasses, ...magicClasses]
     res.json({message: "Welcome to the Character Classes API. Loading all available classes from db...", data: result})
 })
