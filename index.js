@@ -18,10 +18,20 @@ app.use("/magic", magicRoute)
 app.use("/strength", strengthRoute)
 app.use("/endurance", enduranceRoute)
 
-app.get('/', (req,res, next) => {
-    res.send("Welcome to the Classes API. ")
+app.get('/', async (req,res) => {
+    let strengthClasses = await db.collection("strength").find({}).toArray()
+    let magicClasses = await db.collection("magic").find({}).toArray() 
+    let enduranceClasses = await db.collection("endurance").find({}).toArray()  
+    
+    const result = [...strengthClasses,...enduranceClasses, ...magicClasses]
+    res.json({message: "Welcome to the Character Classes API. Loading all available classes from db...", data: result})
 })
+
+app.use((err, _req, res, next) => {
+  res.status(500).send("Something went wrong.");
+});
 
 app.listen(port, () => {
     console.log("Server listening on port " + port)
 })
+

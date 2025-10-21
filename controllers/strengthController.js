@@ -2,7 +2,7 @@ import data from "../data/strength.js";
 import db from "../db.js";
 import { ObjectId } from "mongodb";
 
-async () => {
+async function initialLoad() {
      const validator = {
       $jsonSchema: {
         bsonType: "object",
@@ -28,7 +28,7 @@ async () => {
       },
     }
         await db.command({collMod: "strength", validator})
-        console.log("Validity rules applied.")
+        console.log("Validity rules applied to strength collection..")
 }
 
 async function getClasses(req, res) {
@@ -109,6 +109,7 @@ async function removeClassByName(req,res){
     }
 }
 
+initialLoad()
 export default {
   get: getClasses,
   default: resetClasses,

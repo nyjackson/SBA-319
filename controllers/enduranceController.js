@@ -1,7 +1,11 @@
 import data from '../data/endurance.js'
 import db from '../db.js'
 
-async () => {
+async function initialLoad(){
+    console.log("Adding Validation and Indexing..")
+    await db.collection("endurance").createIndex({"name":1}, (err, result) => {
+        console.log(err || result)
+    })
      const validator = {
       $jsonSchema: {
         bsonType: "object",
@@ -27,7 +31,7 @@ async () => {
       },
     }
         await db.command({collMod: "endurance", validator})
-        console.log("Validity rules applied.")
+        console.log("Validity rules applied to endurance collection.")
 }
 async function getClasses(req,res){
         let endurance_classes;
@@ -98,6 +102,8 @@ async function removeClassByName(req,res){
         res.status(404).json({message: `Unable to locate class by the name of ${req.params.name}. Try again.`})
     }
 }
+
+initialLoad()
 
 export default {
   get: getClasses,

@@ -1,7 +1,7 @@
 import data from '../data/magic.js'
 import db from '../db.js'
 
-async () => {
+async function initialLoad(){
      const validator = {
       $jsonSchema: {
         bsonType: "object",
@@ -27,7 +27,7 @@ async () => {
       },
     }
         await db.command({collMod: "magic", validator})
-        console.log("Validity rules applied.")
+        console.log("Validity rules applied to magic collection.")
 }
 async function getClasses(req,res){
         let magic_classes;
@@ -98,7 +98,7 @@ async function removeClassByName(req,res){
         res.status(404).json({message: `Unable to locate class by the name of ${req.params.name}. Try again.`})
     }
 }
-
+initialLoad()
 export default {
   get: getClasses,
   default: resetClasses,
