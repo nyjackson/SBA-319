@@ -33,19 +33,32 @@ Contains the corresponding data objects used.
 - endurance.js
 - strength.js
 
-### /routes ###
+### API Endpoints & CRUD Operations
 
-Contains the corresponding routes to interact with the data.
+#### Magic Collection
+- GET /magic - Read all magic classes
+- POST /magic/add - Create a new magic class
+- PUT /magic/edit/:name - Update a magic class by name
+- DELETE /magic/remove/:name - Delete a magic class by name
+- POST /magic/reset - Reset to default data
 
-- GET /magic, /strength, /endurance
-- POST /magic/add, /strength/add, /endurance/add
-- PUT /magic/edit/:name, /strength/edit/:name, /endurance/edit/:name
-- DELETE /magic/remove/:name, /strength/remove/:name, /endurance/remove/:name
-- POST /magic/reset, /strength/reset, /endurance/reset
+#### Strength Collection
+- GET /strength - Read all strength classes
+- POST /strength/add - Create a new strength class
+- PUT /strength/edit/:name - Update a strength class by name
+- DELETE /strength/remove/:name - Delete a strength class by name
+- POST /strength/reset - Reset to default data
+
+#### Endurance Collection
+- GET /endurance - Read all endurance classes
+- POST /endurance/add - Create a new endurance class
+- PUT /endurance/edit/:name - Update an endurance class by name
+- DELETE /endurance/remove/:name - Delete an endurance class by name
+- POST /endurance/reset - Reset to default data
 
 ### /controllers ###
 
-Contains the corresponding controllers that handle data interaction and modification.\
+Contains the corresponding controllers that handle data interaction and modification.
 
 - enduranceController.js
 - magicController.js

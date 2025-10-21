@@ -3,7 +3,7 @@ import db from '../db.js'
 
 async function initialLoad(){
     console.log("Adding Validation and Indexing..")
-    await db.collection("endurance").createIndex({"name":1}, (err, result) => {
+    await db.collection("magic").createIndex({"name":1}, (err, result) => {
         console.log(err || result)
     })
      const validator = {
